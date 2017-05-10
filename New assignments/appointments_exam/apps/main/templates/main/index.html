@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+{% block title %}Main Form{% endblock %}
+{% block body %}
+	<div class="row">
+		Hello, {{current_user.name}}
+	</div>
+	<div>
+		<h3>Your tasks for today</h3>
+		<table>
+			<tr>
+				<th>Task</th>
+				<th>Time</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</tr>
+			{% for task in todays_tasks %}
+				<tr>
+					<td>{{task.task}}</td>
+					<td>{{task.time}}</td>
+					<td>{{task.status}}</td>
+					{% if task.status != 'Done' %}
+						<td>
+							<a href="/tasks/{{task.id}}">Edit</a>  |
+							<a href="/tasks/{{task.id}}/destroy">Delete</a>
+						</td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div>
+		<h3>Tasks in the future</h3>
+		<table>
+			<tr>
+				<th>Task</th>
+				<th>Time</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</tr>
+			{% for task in future_tasks %}
+				<tr>
+					<td>{{task.task}}</td>
+					<td>{{task.time}}</td>
+					<td>{{task.status}}</td>
+					{% if task.status != 'Done' %}
+						<td>
+							<a href="/tasks/{{task.id}}">Edit</a>  |
+							<a href="/tasks/{{task.id}}/destroy">Delete</a>
+						</td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div>
+		<h3>Add a new Task</h3>
+		<form action="/tasks" method="post">
+			{% csrf_token %}
+			<div>
+				<label>Task</label>
+				<input type="text" name="task">
+			</div>
+			<div>
+				<label>Date</label>
+				<input type="date" name="date">
+			</div>
+			<div>
+				<label>Time</label>
+				<input type="time" name="time">
+			</div>
+			<input type="submit" value="Create Task">
+		</form>
+		{% if messages %}
+			{% for message in messages %}
+				<p>{{ message }}</p>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock %}

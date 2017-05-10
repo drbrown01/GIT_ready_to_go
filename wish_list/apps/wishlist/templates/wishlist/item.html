@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>This item has all these users</title>
+
+
+</head>
+
+<body>
+
+	<a href="/home">HOME PAGE</a>
+	<a href="/log_out">LOGOUT</a>
+  <h1>These are the users that has {{thisitem.item}} in their wishlist!</h1>
+  <h3>Created by {{thisitem.creator.username}}    &nbsp;&nbsp;&nbsp;&nbsp;[Created at: {{thisitem.created_at}}]</h3>
+
+  <div>
+  	<h3>Users:</h3><hr>
+
+  	{% if users %}
+      {% for user in users %}
+        <p>{{user.username}}</p>
+      {% endfor %}
+    {% endif %}
+
+
+</head>
+
+</html>

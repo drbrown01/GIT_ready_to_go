@@ -1,0 +1,8 @@
+*{
+  color: red;
+  /*display: inline-block;*/
+}
+#container {
+  width: 200px;
+  display: justify;
+}

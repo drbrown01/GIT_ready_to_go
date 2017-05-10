@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="container">
+		<h1>Edit Product {{ product.id }}</h1>
+		<form action="/products/{{ product.id }}/" method="post">
+			{% csrf_token %}
+			<label id="name">Name</label>
+			<input type="text" name="name" id="name" placeholder="{{ product.name }}" />
+			<label id="description">Description</label>
+			<input type="text" name="description" id="description" placeholder="{{ product.description }}" />
+			<label id="price">Price</label>
+			<input type="text" name="price" id="price" placeholder="{{ product.price }}" />
+			<input type="submit" value="Update" />
+		</form>
+		<a href="/products/{{ product.id }}">Show</a> | <a href="/products">Home</a>
+	</div>
+</body>
+</html>

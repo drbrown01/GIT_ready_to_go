@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block title %}Edit Page{% endblock %}
+{% block body %}
+	<div>
+		<h3>Edit a Task</h3>
+		<form action="/tasks/{{task.id}}/update" method="post">
+			{% csrf_token %}
+			<div>
+				<label>Task</label>
+				<input type="text" name="task" value="{{task.task}}">
+			</div>
+			<div>
+				<label>Date</label>
+				<input type="date" name="date" value="{{task_date}}">
+			</div>
+			<div>
+				<label>Time</label>
+				<input type="time" name="time" value="{{task_time}}">
+			</div>
+			<div>
+				<label>Status</label>
+					<select name="status">
+						<option selected>{{task.status}}</option>
+						{% if task.status == 'Pending' %}
+							<option>Done</option>
+						{% else %}
+							<option>Pending</option>
+						{% endif %}
+					</select>
+			</div>
+			<input type="submit" value="Update Task">
+		</form>
+		{% if messages %}
+			{% for message in messages %}
+				<p>{{ message }}</p>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock %}

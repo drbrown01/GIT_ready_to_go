@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>Add an item on your wishlist</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'wishlist/css/style.css' %}" media="screen" charset="utf-8">
+</head>
+
+<body>
+
+	<a href="/home">HOME PAGE</a>
+	<a href="/log_out">LOGOUT</a>
+	<h2>Add a new item to my wishlist:</h2>
+
+
+	<form action='/additem/process' method="post">
+		{% csrf_token %}
+		<p>Item/Product: <input type="text" name="item"></p>
+		<input type="submit" value="Add to wishlist">
+	</form>
+
+
+</body>
+
+</html>

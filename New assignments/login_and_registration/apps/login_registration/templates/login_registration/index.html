@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Success(index.html)</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'login_registration/css/style.css' %}?{% now 'U' %}">
+</head>
+<body>
+	<div id="container">
+		<h1>Success! Welcome, {{ request.session.username }}!</h1>
+		{% if messages %}
+			{% for message in messages %}
+			<h3 class="green">You have successfully {{ message }}!</h3>
+			{% endfor %}
+		{% endif %}
+		<a href="/users/logout">Logout</a>
+	</div>
+</body>
+</html>

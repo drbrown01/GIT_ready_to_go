@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index.html</title>
+</head>
+<body>
+	<div id="container">
+		<h1>Products</h1>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for product in products %}
+				<tr>
+					<td>{{ product.name }}</td>
+					<td>{{ product.description }}</td>
+					<td>{{ product.price }}</td>
+					<td>
+						<a href="/products/{{ product.id }}">Show</a>
+						<a href="/products/edit/{{ product.id }}">Edit</a>
+						<a href="/products/destroy/{{ product.id }}">Destroy</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="/products/new">Add a new product</a>
+	</div>
+</body>
+</html>

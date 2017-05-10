@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="top">
+		{% for email in messages %}
+		<p>The email address you entered ({{ email.message }})</p>
+		{% endfor %}
+		<p>is a VALID email address! Thank You!</p>
+	</div>
+	<div id="bottom">
+		<h3>Email Addresses Entered:</h3>
+		{% for user in users %}
+			<p>{{ user.email }} {{ user.created_at }}</p>
+		{% endfor %}
+	</div>
+</body>
+</html>

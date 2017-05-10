@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title>Login/Registration</title>
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static '/login/css/stylesheet.css' %}" media="screen" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Welcome!</h1>
+        </div>
+
+        <div class="error">
+            <ul>
+            {% for idx in messages %}
+                <li>{{ idx}}</li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div class="contentBox">
+            <form class="boxes" action= '{% url "login_ns:register" %}' method='POST'>
+                    {% csrf_token %}
+                    <h2>Please Register</h2>
+                    <hr>
+                    <h4>First Name: </h4><input type="text" name="first_name">
+                    <h4>Userame: </h4><input type="text" name="username">
+                    <h4>Password: </h4><input type="text" name="password">
+                    <h4>Confirm Password: </h4><input type="text" name="confirm">
+
+                    <input type="submit" value="Register!">
+            </form>
+        </div>
+
+        <div class="contentBox">
+            <form class="boxes" action= '{% url "login_ns:login" %}' method='POST'>
+                    {% csrf_token %}
+                    <h2>Login</h2>
+                    <hr>
+                    <h4>Username: </h4><input type="text" name="username">
+                    <h4>Password: </h4><input type="text" name="password">
+                    <input type="submit" value="Login!">
+            </form>
+        </div>
+        <div class="contentBox">
+         <h1>Current Users:</h1>
+
+                <table>
+
+                    <tr>
+                        <th>User First Name</th>
+                        <th>Username</th>
+                        <th>User ID</th>
+
+                    </tr>
+                    {% for idx in all_users %}
+                    <tr>
+                        <td>{{idx.first_name}} </td>
+                        <td>{{idx.username}} </td>
+                        <td>{{idx.id}} </td>
+
+
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+   </div>
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>Schedule Trip</title>
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static '/travelbuddy/css/stylesheet.css' %}" media="screen" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+                <div class="upperRight">
+                     <a href= '{% url "travel_ns:travel_index" %}' id="link">Dashboard</a>
+                </div>
+        </div>
+
+          <div class="error">
+            <ul>
+            {% for idx in messages %}
+                <li>{{ idx}}</li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div class="contentBox">
+            <form class="boxes" action= '{% url "travel_ns:create" %}' method='POST'>
+                    {% csrf_token %}
+                <h1>Create a New Trip!</h1>
+                <hr>
+                <h4>Destination: </h4><input type="text" name="item_name">
+                <h4>Description: </h4><input type="text" name="trip_description">
+                <h4>Start Date: <input type="date" name="start_date">
+                <h4>End Date: <input type="date" name="end_date">
+
+                <input type="submit" value="Add!">
+
+             </form>
+        </div>
+
+        <form action="{% url 'travel_ns:logout' %}">
+            {% csrf_token %}
+            <input type="submit" name="" value="logout">
+        </form>
+
+
+   </div>
+
+</body>
+
+</html>

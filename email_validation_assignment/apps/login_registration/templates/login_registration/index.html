@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Login and Registration</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'login_registration/css/style.css' %}?{% now 'U' %}">
+</head>
+<body>
+	<div id="container">
+		<fieldset>
+			<legend> Registration </legend>
+			<form action="{% url 'user_register' %}" method="post">
+				{% csrf_token %}
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'name' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="name">Name:
+					<input type="text" name="name" id="name" />
+				</label>
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'alias' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="alias">Alias:
+					<input type="text" name="alias" id="alias" />
+				</label>
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'email' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="email">Email:
+					<input type="text" name="email" id="email" />
+				</label>
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'password' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="password">Password*:
+					<input type="password" name="password" id="password" />
+				</label>
+				<p class="italic">*Password must be at least 8 characters</p>
+				<label for="confirm_pw">Confirm Password:
+					<input type="password" name="confirm_password" id="confirm_pw" />
+				</label>
+				<input type="submit" value="Register" />
+			</form>
+		</fieldset>
+		<fieldset>
+			<legend> Login </legend>
+			<form action="{% url 'user_login' %}" method="post">
+				{% csrf_token %}
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'login' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="logEmail">Email:
+					<input type="text" name="email" id="logEmail" />
+				</label>
+				<label for="logPassword">Password:
+					<input type="password" name="password" id="logPassword" />
+				</label>
+				<input type="submit" value="Login" />
+			</form>
+		</fieldset>
+	</div>
+</body>
+</html>

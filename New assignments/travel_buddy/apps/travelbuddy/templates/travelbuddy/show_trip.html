@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>View Trip</title>
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static '/travelbuddy/css/stylesheet.css' %}" media="screen" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+                <div class="upperRight">
+                     <a href= '{% url "travel_ns:travel_index" %}' id="link">Dashboard</a>
+                </div>
+        </div>
+
+
+        <div class="contentBox">
+            <h1>{{this_item.destination}}</h1>
+            <h4>Planned By: {{this_item.created_by.first_name}}</h4>
+            <h4>Description: {{this_item.plan}}</h4>
+            <h4>Travel Start Date: {{this_item.start_date}}</h4>
+            <h4>Travel End Date: {{this_item.end_date}}</h4>
+            <br>
+            <h2>Other users joining the trip:</h2>
+            <hr>
+            <br>
+
+            {% for idx in wishers %}
+
+                <p>{{idx.first_name}}</p>
+
+
+            {% endfor %}
+
+
+        </div>
+
+        <form action="{% url 'travel_ns:logout' %}">
+            {% csrf_token %}
+            <input type="submit" name="" value="logout">
+        </form>
+
+
+   </div>
+
+</body>
+
+</html>

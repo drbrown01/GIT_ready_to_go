@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>Home page</title>
+
+
+</head>
+
+<body>
+
+	<a href="/log_out"><button>LOGOUT</button></a>
+	<h2>Welcome {{thisuser.username}} to the wish list!</h2>
+
+	<div>
+		<h3>My wish list</h3>
+		<table>
+			<thead>
+				<th>Item &nbsp;&nbsp;&nbsp;</th>
+				<th>Created by &nbsp;&nbsp;&nbsp;</th>
+				<th>Date added &nbsp;&nbsp;&nbsp;</th>
+				<th>Action &nbsp;&nbsp;&nbsp;</th>
+			</thead>
+			{% if items %}
+				<tbody>
+
+					{% for item in items %}
+						<tr>
+							<td><a href="/display/{{item.id}}">{{item.item}}</a>&nbsp;&nbsp;&nbsp;</td>
+							<td>{{item.creator.username}}&nbsp;&nbsp;&nbsp;</td>
+							<td>{{item.created_at}}&nbsp;&nbsp;&nbsp;</td>
+							{% if item.creator.id == thisuser.id%}
+							<td><a href="/delete/{{item.id}}">Delete Item</a>&nbsp;&nbsp;&nbsp;</td>
+							{% else%}
+							<td><a href="/remove/{{item.id}}">Remove from  wishlist</a>&nbsp;&nbsp;&nbsp;</td>
+							{% endif %}
+						</tr>
+					{% endfor %}
+				</tbody>
+			{% endif %}
+		</table>
+		<a href="/additem"><button>Create New Item</button></a>
+	</div>
+
+	<div>
+		<h3>Other user's wish list</h3>
+		<table>
+			<thead>
+				<th>Item &nbsp;&nbsp;&nbsp;</th>
+				<th>Created by &nbsp;&nbsp;&nbsp;</th>
+				<th>Date added &nbsp;&nbsp;&nbsp;</th>
+				<th>Action &nbsp;&nbsp;&nbsp;</th>
+			</thead>
+			{% if allitem %}
+				<tbody>
+
+					{% for item in allitem %}
+						<tr>
+							<td><a href="/display/{{item.id}}">{{item.item}}</a>&nbsp;&nbsp;&nbsp;</td>
+							<td>{{item.creator.username}}&nbsp;&nbsp;&nbsp;</td>
+							<td>{{item.created_at}}&nbsp;&nbsp;&nbsp;</td>
+							<td><a href="/addthis/{{item.id}}">Add to wishlist</a>&nbsp;&nbsp;&nbsp;</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			{% endif %}
+		</table>
+
+
+
+	</div>
+
+
+</body>
+
+</html>

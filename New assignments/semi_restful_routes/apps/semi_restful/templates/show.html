@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show.html</title>
+</head>
+<body>
+	<div id="container">
+		<h1>Product {{ product.id }}</h1>
+		<p>Name: {{ product.name }}</p>
+		<p>Description: {{ product.description }}</p>
+		<p>Price: {{ product.price }}</p>
+		<a href="/products/edit/{{ product.id }}">Edit</a> | <a href="/products">Back</a>
+	</div>
+</body>
+</html>

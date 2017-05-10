@@ -1,0 +1,46 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+#container {
+	
+}
+
+form, #result, #success {
+	margin: 20px auto;
+	border: 1px solid black;
+	padding: 30px;
+	width: 250px;
+}
+
+label,p {
+	display: block;
+	margin-bottom: 15px;
+}
+
+input,select {
+	float: right;
+}
+
+textarea {
+	display: block;
+}
+
+.submit {
+	background-color: blue;
+	color: white;
+	padding: 7px;
+	text-decoration: none;
+	float: right;
+}
+
+#success {
+	background-color: lightgreen;
+	word-wrap: break-word;
+}
+
+h2 {
+	text-decoration: underline;
+	margin-bottom: 18px;
+}

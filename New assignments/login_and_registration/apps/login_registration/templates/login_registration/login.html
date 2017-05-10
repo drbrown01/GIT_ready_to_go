@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Login and Registration(login.html)</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'login_registration/css/style.css' %}?{% now 'U' %}">
+</head>
+<body>
+	<div id="container">
+		<fieldset>
+			<legend> Registration </legend>
+			<form action="/users/register" method="post">
+				{% csrf_token %}
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'first_name' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="first_name">First Name:
+					<input type="text" name="first_name" id="first_name" />
+				</label>
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'last_name' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="last_name">Last Name:
+					<input type="text" name="last_name" id="last_name" />
+				</label>
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'username' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="username">Username:
+					<input type="text" name="username" id="username" />
+				</label>
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'email' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="email">Email:
+					<input type="text" name="email" id="email" />
+				</label>
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'birthdate' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="birthdate">Birthdate:
+					<input type="date" name="birthdate" id="birthdate" />
+				</label>
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'password' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="password">Password*:
+					<input type="password" name="password" id="password" />
+				</label>
+				<label for="confirm_pw">Confirm Password:
+					<input type="password" name="confirm_password" id="confirm_pw" />
+				</label>
+				<p class="italic">*Password must be at least 8 characters and contain a number, an uppercase letter, a lowercase letter, and a special character (!?%&_)</p>
+				<input type="submit" value="Register" />
+			</form>
+		</fieldset>
+		<fieldset>
+			<legend> Login </legend>
+			<form action="/users/login" method="post">
+				{% csrf_token %}
+				{% if messages %}
+					{% for error in messages %}
+						{% if 'login' in error.tags %}
+						<p class="red">{{ error }}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<label for="logEmail">Email:
+					<input type="text" name="email" id="logEmail" />
+				</label>
+				<label for="logPassword">Password:
+					<input type="password" name="password" id="logPassword" />
+				</label>
+				<input type="submit" value="Login" />
+			</form>
+		</fieldset>
+	</div>
+</body>
+</html>

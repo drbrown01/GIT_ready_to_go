@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <title>Travel Dashboard</title>
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static '/travelbuddy/css/stylesheet.css' %}" media="screen" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+                <div class="upperRight">
+                    <a href= '{% url "travel_ns:add" %}' id="link">Add Travel Plan</a>
+
+                </div>
+
+
+            <h1>Hello, {{all_data.current_user.first_name}}!</h1>
+
+        </div>
+
+
+
+        <div class="contentBox">
+            <form class="boxes" action= '{% url "travel_ns:travel_index" %}' method='POST'>
+                    {% csrf_token %}
+                <h2>Your Trip Schedule:</h2>
+
+                <table>
+
+                    <tr>
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Plan</th>
+
+                    </tr>
+                    {% for idx in all_data.wishlist %}
+
+                    <tr>
+
+                        <td><a href='{% url "travel_ns:view" idx.id %}'>{{idx.destination}}</a> </td>
+                        <td>{{idx.start_date}}</td>
+                        <td>{{idx.end_date}}</td>
+                        <td>{{idx.plan}}</td>
+                    </tr>
+
+                    {% endfor %}
+                </table>
+
+            </form>
+        </div>
+
+        <div class="contentBox">
+            <form class="boxes" action= '{% url "travel_ns:travel_index" %}' method='POST'>
+                    {% csrf_token %}
+                <h2>Other User's Wish List:</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Destination</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Want to Join?</th>
+                    </tr>
+                    {% for idx in all_data.other_wishlist %}
+                    <tr>
+                        <td>{{idx.created_by.first_name}} </td>
+                        <td>{{idx.destination}} </td>
+                        <td>{{idx.start_date}}</td>
+                        <td>{{idx.end_date}}</td>
+                        <td>
+                            <form action="{% url 'travel_ns:add_wishlist' item_id=idx.id %}" method='POST'>
+                                {% csrf_token %}
+                                <input type='submit' value= 'Join'>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        </div>
+
+       <form action="{% url 'travel_ns:logout' %}">
+            {% csrf_token %}
+            <input type="submit" name="" value="logout">
+        </form>
+
+   </div>
+
+</body>
+
+</html>
